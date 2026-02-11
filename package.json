@@ -1,0 +1,10 @@
+{
+  "name": "ongconnect",
+  "version": "1.0.0",
+  "description": "Plateforme web de gestion et de collecte de dons pour ONG",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js"
+  }
+}
