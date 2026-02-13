@@ -10,6 +10,15 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   const msg = document.getElementById('loginMessage');
 
   if (!res.ok) {
+    msg.className = 'text-danger';
+    msg.textContent = data.error || 'Erreur de connexion';
+    return;
+  }
+
+  localStorage.setItem('token', data.token);
+  msg.className = 'text-success';
+  msg.textContent = `Bienvenue ${data.user.username}`;
+  setTimeout(() => (location.href = '/admin.html'), 400);
     msg.textContent = data.error || 'Échec de connexion';
     msg.className = 'text-danger';
     return;

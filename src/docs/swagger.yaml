@@ -1,0 +1,45 @@
+openapi: 3.0.3
+info:
+  title: ONGConnect API
+  version: 2.0.0
+  description: API de gestion ONG (auth JWT, projets, dons, bénéficiaires)
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /auth/login:
+    post:
+      summary: Connexion utilisateur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username: { type: string }
+                password: { type: string }
+      responses:
+        '200': { description: OK }
+  /public/projects:
+    get:
+      summary: Liste des projets actifs
+      responses:
+        '200': { description: OK }
+  /public/donations:
+    post:
+      summary: Créer un don
+      responses:
+        '201': { description: Créé }
+  /admin/stats:
+    get:
+      summary: Statistiques dashboard
+      security:
+        - bearerAuth: []
+      responses:
+        '200': { description: OK }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

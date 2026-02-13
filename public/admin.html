@@ -3,75 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard Admin - ONGConnect</title>
+  <title>Dashboard | ONGConnect Pro</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark">
-  <div class="container-fluid">
-    <span class="navbar-brand">Dashboard ONGConnect</span>
-    <button id="logoutBtn" class="btn btn-outline-light btn-sm">Déconnexion</button>
-  </div>
-</nav>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand">Dashboard ONGConnect Pro</span>
+      <div class="d-flex gap-2">
+        <a href="/api-docs" target="_blank" class="btn btn-outline-info btn-sm">Swagger</a>
+        <button id="logoutBtn" class="btn btn-outline-light btn-sm">Déconnexion</button>
+      </div>
+    </div>
+  </nav>
 
-<main class="container py-4">
-  <div class="row g-3 mb-3">
-    <div class="col-md-4"><div class="stat-card"><h6>Total dons</h6><h2 id="totalDons">0</h2></div></div>
-    <div class="col-md-4"><div class="stat-card"><h6>Bénéficiaires</h6><h2 id="totalBenef">0</h2></div></div>
-    <div class="col-md-4"><div class="stat-card"><h6>Projets actifs</h6><h2 id="totalProjects">0</h2></div></div>
-  </div>
+  <main class="container py-4">
+    <div class="row g-3 mb-3">
+      <div class="col-md-4"><div class="stat-card"><h6>Total des dons</h6><h3 id="totalDons">0</h3></div></div>
+      <div class="col-md-4"><div class="stat-card"><h6>Bénéficiaires</h6><h3 id="totalBenef">0</h3></div></div>
+      <div class="col-md-4"><div class="stat-card"><h6>Projets actifs</h6><h3 id="totalProjects">0</h3></div></div>
+    </div>
 
-  <div class="card p-3 mb-3">
-    <h5>Impact visuel</h5>
-    <canvas id="impactChart" height="90"></canvas>
-  </div>
+    <div class="card p-3 mb-3"><h5>Évolution des dons</h5><canvas id="impactChart" height="80"></canvas></div>
 
-  <div class="row g-3">
-    <div class="col-lg-6">
-      <div class="card p-3 h-100">
-        <div class="d-flex justify-content-between"><h5>Projets</h5><button id="downloadReport" class="btn btn-sm btn-outline-primary">Rapport PDF</button></div>
-        <form id="projectForm" class="row g-2 mb-3">
-          <input type="hidden" name="id">
-          <div class="col-6"><input class="form-control" name="titre" placeholder="Titre" required></div>
-          <div class="col-6"><input class="form-control" name="budget" type="number" placeholder="Budget"></div>
-          <div class="col-12"><textarea class="form-control" name="description" placeholder="Description"></textarea></div>
-          <div class="col-6"><input class="form-control" name="date_debut" type="date"></div>
-          <div class="col-6"><input class="form-control" name="date_fin" type="date"></div>
-          <div class="col-12 form-check"><input class="form-check-input" type="checkbox" name="actif" checked><label class="form-check-label">Actif</label></div>
-          <div class="col-12"><button class="btn btn-primary btn-sm">Enregistrer</button></div>
-        </form>
-        <ul class="list-group" id="projectsAdminList"></ul>
+    <div class="row g-3">
+      <div class="col-lg-6">
+        <div class="card p-3 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-2"><h5 class="mb-0">Projets</h5><button id="downloadReport" class="btn btn-outline-primary btn-sm">Télécharger rapport</button></div>
+          <form id="projectForm" class="row g-2" enctype="multipart/form-data">
+            <input type="hidden" name="id" />
+            <div class="col-6"><input name="titre" class="form-control" placeholder="Titre" required /></div>
+            <div class="col-6"><input name="budget" type="number" class="form-control" placeholder="Budget" /></div>
+            <div class="col-12"><textarea name="description" class="form-control" placeholder="Description"></textarea></div>
+            <div class="col-6"><input name="dateDebut" type="date" class="form-control" /></div>
+            <div class="col-6"><input name="dateFin" type="date" class="form-control" /></div>
+            <div class="col-7"><input name="image" type="file" accept="image/*" class="form-control" /></div>
+            <div class="col-5 form-check d-flex align-items-center"><input name="actif" type="checkbox" class="form-check-input" checked /><label class="form-check-label ms-2">Actif</label></div>
+            <div class="col-12"><button class="btn btn-primary btn-sm">Sauvegarder projet</button></div>
+          </form>
+          <ul id="projectsAdminList" class="list-group mt-3"></ul>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card p-3 h-100">
+          <h5>Bénéficiaires</h5>
+          <form id="benefForm" class="row g-2">
+            <div class="col-4"><input name="nom" class="form-control" placeholder="Nom" required /></div>
+            <div class="col-3"><input name="age" type="number" class="form-control" placeholder="Âge" /></div>
+            <div class="col-5"><input name="localite" class="form-control" placeholder="Localité" /></div>
+            <div class="col-8"><select id="benefProjectSelect" name="projet" class="form-select" required></select></div>
+            <div class="col-4"><button class="btn btn-success btn-sm w-100">Ajouter</button></div>
+          </form>
+          <ul id="benefList" class="list-group mt-3"></ul>
+        </div>
       </div>
     </div>
 
-    <div class="col-lg-6">
-      <div class="card p-3 h-100">
-        <h5>Bénéficiaires</h5>
-        <form id="benefForm" class="row g-2 mb-3">
-          <div class="col-4"><input class="form-control" name="nom" placeholder="Nom" required></div>
-          <div class="col-3"><input class="form-control" name="age" type="number" placeholder="Âge"></div>
-          <div class="col-5"><input class="form-control" name="localite" placeholder="Localité"></div>
-          <div class="col-8"><select class="form-select" name="projet_id" id="benefProjectSelect"></select></div>
-          <div class="col-4"><button class="btn btn-success btn-sm w-100">Ajouter</button></div>
-        </form>
-        <ul class="list-group" id="benefList"></ul>
-      </div>
+    <div class="card p-3 mt-3">
+      <h5>Historique des dons</h5>
+      <div class="table-responsive"><table class="table table-sm"><thead><tr><th>Date</th><th>Donateur</th><th>Projet</th><th>Montant</th></tr></thead><tbody id="donTable"></tbody></table></div>
     </div>
-  </div>
+  </main>
 
-  <div class="card p-3 mt-3">
-    <h5>Historique des dons</h5>
-    <div class="table-responsive">
-      <table class="table table-sm">
-        <thead><tr><th>Date</th><th>Donateur</th><th>Projet</th><th>Montant</th></tr></thead>
-        <tbody id="donTable"></tbody>
-      </table>
-    </div>
-  </div>
-</main>
-
-<script src="/admin.js"></script>
+  <script src="/admin.js"></script>
 </body>
 </html>

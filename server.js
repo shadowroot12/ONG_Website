@@ -1,3 +1,5 @@
+// Entrypoint legacy: utilisez `node src/server.js`.
+require('./src/server');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
