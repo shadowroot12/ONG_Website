@@ -1,0 +1,22 @@
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const payload = Object.fromEntries(new FormData(e.target).entries());
+  const res = await fetch('/api/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json();
+  const msg = document.getElementById('loginMessage');
+
+  if (!res.ok) {
+    msg.className = 'text-danger';
+    msg.textContent = data.error || 'Erreur de connexion';
+    return;
+  }
+
+  localStorage.setItem('token', data.token);
+  msg.className = 'text-success';
+  msg.textContent = `Bienvenue ${data.user.username}`;
+  setTimeout(() => (location.href = '/admin.html'), 400);
+});

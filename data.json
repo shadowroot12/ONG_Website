@@ -1,0 +1,4 @@
+{
+  "deprecated": true,
+  "message": "Stockage JSON remplacé par MongoDB."
+}
