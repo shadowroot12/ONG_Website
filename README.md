@@ -73,15 +73,9 @@ Plateforme moderne de gestion et collecte de dons pour ONG.
 - **Tests**: Jest + Supertest + mongodb-memory-server
 - **Frontend**: HTML/CSS/Bootstrap/JS + Chart.js
 
-## 3) Variables d’environnement
 
-Copier `.env.example` vers `.env` puis ajuster:
 
-```bash
-cp .env.example .env
-```
-
-## 4) Installation et lancement
+## 3) Installation et lancement
 
 ```bash
 npm install
