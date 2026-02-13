@@ -19,4 +19,12 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   msg.className = 'text-success';
   msg.textContent = `Bienvenue ${data.user.username}`;
   setTimeout(() => (location.href = '/admin.html'), 400);
+    msg.textContent = data.error || 'Échec de connexion';
+    msg.className = 'text-danger';
+    return;
+  }
+
+  msg.textContent = `Bienvenue ${data.user.username}`;
+  msg.className = 'text-success';
+  setTimeout(() => (window.location.href = '/admin.html'), 500);
 });

@@ -1,4 +1,47 @@
 {
-  "deprecated": true,
-  "message": "Stockage JSON remplacé par MongoDB."
+  "ong": {
+    "id": 1,
+    "nom": "ONGConnect",
+    "description": "Nous accompagnons les communautés vulnérables à travers des projets durables en santé, éducation et autonomisation.",
+    "email": "contact@ongconnect.org",
+    "telephone": "+243 900 000 000"
+  },
+  "projets": [
+    {
+      "id": 1,
+      "titre": "Eau potable pour tous",
+      "description": "Installation de 10 points d’eau potable dans les zones rurales.",
+      "budget": 25000,
+      "montant_collecte": 7200,
+      "date_debut": "2026-01-01",
+      "date_fin": "2026-10-30",
+      "actif": 1
+    },
+    {
+      "id": 2,
+      "titre": "Cantines scolaires solidaires",
+      "description": "Distribution quotidienne de repas équilibrés pour 500 enfants.",
+      "budget": 18000,
+      "montant_collecte": 11650,
+      "date_debut": "2026-02-01",
+      "date_fin": "2026-12-15",
+      "actif": 1
+    }
+  ],
+  "dons": [],
+  "beneficiaires": [],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "gestionnaire",
+      "password": "manager123",
+      "role": "gestionnaire"
+    }
+  ]
 }
